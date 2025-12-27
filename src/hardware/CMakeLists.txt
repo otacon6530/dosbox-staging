@@ -86,7 +86,7 @@ target_link_libraries(libdosboxcommon PRIVATE
   libtalchorus
   $<IF:$<BOOL:${C_MANYMOUSE}>,libmanymouse,>
   libnuked
-  PkgConfig::SPEEXDSP
+  #PkgConfig::SPEEXDSP
   $<IF:$<TARGET_EXISTS:SDL2_net::SDL2_net>,SDL2_net::SDL2_net,SDL2_net::SDL2_net-static>
 )
 
