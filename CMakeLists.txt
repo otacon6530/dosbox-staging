@@ -389,7 +389,7 @@ find_package(PkgConfig REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)
 find_package(SDL2_net REQUIRED)
-find_package(iir REQUIRED)
+#find_package(iir REQUIRED)
 find_package(PNG REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(MT32Emu REQUIRED)
@@ -452,7 +452,7 @@ if(LIBATOMIC)
 endif()
 
 target_link_libraries(libdosboxcommon PRIVATE
-  $<IF:$<TARGET_EXISTS:iir::iir>,iir::iir,iir::iir_static>
+  #$<IF:$<TARGET_EXISTS:iir::iir>,iir::iir,iir::iir_static>
   loguru
   libdecoders
 )
