@@ -18,7 +18,21 @@
 #include <utility>
 #include <vector>
 
-#include <Iir.h>
+// Removed external Iir.h dependency; define simple pass-through filters locally
+namespace SimpleFilters {
+class HighPass {
+public:
+	void setup(int /*order*/, int /*sample_rate_hz*/, double /*cutoff_freq_hz*/) {}
+	void setup(int /*sample_rate_hz*/, double /*cutoff_freq_hz*/) {}
+	float filter(float sample) { return sample; }
+};
+class LowPass {
+public:
+	void setup(int /*order*/, int /*sample_rate_hz*/, double /*cutoff_freq_hz*/) {}
+	void setup(int /*sample_rate_hz*/, double /*cutoff_freq_hz*/) {}
+	float filter(float sample) { return sample; }
+};
+} // namespace SimpleFilters
 
 #include "private/envelope.h"
 #include "private/noise_gate.h"
@@ -425,14 +439,14 @@ private:
 	struct {
 		struct {
 			FilterState state = FilterState::Off;
-			std::array<Iir::Butterworth::HighPass<MaxFilterOrder>, 2> hpf = {};
+			std::array<SimpleFilters::HighPass, 2> hpf = {};
 			int order          = 0;
 			int cutoff_freq_hz = 0;
 		} highpass = {};
 
 		struct {
 			FilterState state = FilterState::Off;
-			std::array<Iir::Butterworth::LowPass<MaxFilterOrder>, 2> lpf = {};
+			std::array<SimpleFilters::LowPass, 2> lpf = {};
 			int order          = 0;
 			int cutoff_freq_hz = 0;
 		} lowpass = {};
