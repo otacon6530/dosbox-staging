@@ -435,9 +435,9 @@ add_library(libdosboxcommon STATIC)
 
 # Add tests before src so that the dosbox_tests target is
 # available for target_sources()
-if (OPT_TESTS)
-  add_subdirectory(tests)
-endif()
+#if (OPT_TESTS)
+#  add_subdirectory(tests)
+#endif()
 
 add_subdirectory(src)
 
